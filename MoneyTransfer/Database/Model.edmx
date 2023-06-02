@@ -1,0 +1,435 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="MoneyGatewaydbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="address_details">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="trans_id" Type="nvarchar" MaxLength="250" />
+          <Property Name="Full_Name" Type="nvarchar" MaxLength="250" />
+          <Property Name="phone_num" Type="nvarchar" MaxLength="250" />
+          <Property Name="email" Type="nvarchar" MaxLength="250" />
+          <Property Name="city" Type="nvarchar" MaxLength="250" />
+          <Property Name="address_type" Type="nvarchar" MaxLength="250" />
+          <Property Name="username" Type="nvarchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="Admin_NotificationTbl">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="username" Type="nvarchar" MaxLength="150" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="email" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Subject" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="Message" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="IsRead" Type="bit" />
+        </EntityType>
+        <EntityType Name="BalanceTbl">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="550" />
+          <Property Name="ActiveDollars" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Acc_Num" Type="nvarchar" MaxLength="550" />
+        </EntityType>
+        <EntityType Name="cartItems">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="trans_id" Type="nvarchar" MaxLength="250" />
+          <Property Name="price" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="name" Type="nvarchar" MaxLength="150" />
+          <Property Name="product" Type="nvarchar" MaxLength="150" />
+          <Property Name="quantity" Type="nvarchar" MaxLength="150" />
+          <Property Name="cart" Type="nvarchar" MaxLength="150" />
+          <Property Name="total" Type="nvarchar" MaxLength="150" />
+          <Property Name="username" Type="nvarchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="ForgotPassword">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="username" Type="nvarchar" MaxLength="250" />
+          <Property Name="guid" Type="nvarchar" MaxLength="350" />
+          <Property Name="createdOn" Type="datetime" />
+        </EntityType>
+        <EntityType Name="resetExtra">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="username" Type="nvarchar" MaxLength="450" />
+          <Property Name="code" Type="nvarchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="signup_table">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FullName" Type="nvarchar" MaxLength="150" />
+          <Property Name="username" Type="varchar" MaxLength="150" />
+          <Property Name="email" Type="nvarchar" MaxLength="150" />
+          <Property Name="password" Type="nvarchar" MaxLength="150" />
+          <Property Name="conf_password" Type="nvarchar" MaxLength="150" />
+          <Property Name="Account_No" Type="nvarchar" MaxLength="550" />
+        </EntityType>
+        <EntityType Name="tbl_stripeDashboard">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="trans_id" Type="bigint" />
+          <Property Name="Balnc_ID" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="amount" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="currency" Type="nvarchar" MaxLength="100" />
+          <Property Name="description" Type="nvarchar" MaxLength="250" />
+          <Property Name="email" Type="nvarchar" MaxLength="250" />
+          <Property Name="date" Type="datetime" />
+          <Property Name="username" Type="nvarchar" MaxLength="250" />
+          <Property Name="risk" Type="nvarchar" MaxLength="250" />
+          <Property Name="risk_level" Type="nvarchar" MaxLength="150" />
+          <Property Name="Brand" Type="nvarchar" MaxLength="250" />
+          <Property Name="status" Type="nvarchar" MaxLength="250" />
+          <Property Name="fingerprint" Type="nvarchar" MaxLength="250" />
+          <Property Name="last4" Type="bigint" />
+          <Property Name="ExpMonth" Type="nvarchar" MaxLength="50" />
+          <Property Name="ExpYear" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="tbl_Transaction">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="From_Acc" Type="nvarchar" MaxLength="550" />
+          <Property Name="To_Acc" Type="nvarchar" MaxLength="550" />
+          <Property Name="Amount" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="DateTime" Type="nvarchar" MaxLength="500" />
+          <Property Name="IsRead_Sent" Type="bit" />
+          <Property Name="IsRead_Received" Type="bit" />
+        </EntityType>
+        <EntityType Name="User_Notifications">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="150" />
+          <Property Name="Admin_reply" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="IsRead" Type="bit" />
+        </EntityType>
+        <EntityContainer Name="MoneyGatewaydbModelStoreContainer">
+          <EntitySet Name="address_details" EntityType="Self.address_details" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Admin_NotificationTbl" EntityType="Self.Admin_NotificationTbl" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BalanceTbl" EntityType="Self.BalanceTbl" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="cartItems" EntityType="Self.cartItems" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ForgotPassword" EntityType="Self.ForgotPassword" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="resetExtra" EntityType="Self.resetExtra" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="signup_table" EntityType="Self.signup_table" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_stripeDashboard" EntityType="Self.tbl_stripeDashboard" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_Transaction" EntityType="Self.tbl_Transaction" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User_Notifications" EntityType="Self.User_Notifications" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="MoneyGatewaydbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="MoneyGatewaydbEntities11" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Admin_NotificationTbl" EntityType="MoneyGatewaydbModel.Admin_NotificationTbl" />
+          <EntitySet Name="BalanceTbls" EntityType="MoneyGatewaydbModel.BalanceTbl" />
+          <EntitySet Name="signup_table" EntityType="MoneyGatewaydbModel.signup_table" />
+          <EntitySet Name="tbl_Transaction" EntityType="MoneyGatewaydbModel.tbl_Transaction" />
+          <EntitySet Name="User_Notifications" EntityType="MoneyGatewaydbModel.User_Notifications" />
+          <EntitySet Name="address_details" EntityType="MoneyGatewaydbModel.address_details" />
+          <EntitySet Name="cartItems" EntityType="MoneyGatewaydbModel.cartItem" />
+          <EntitySet Name="tbl_stripeDashboard" EntityType="MoneyGatewaydbModel.tbl_stripeDashboard" />
+          <EntitySet Name="ForgotPasswords" EntityType="MoneyGatewaydbModel.ForgotPassword" />
+          <EntitySet Name="resetExtras" EntityType="MoneyGatewaydbModel.resetExtra" />
+        </EntityContainer>
+        <EntityType Name="Admin_NotificationTbl">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="username" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="email" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Subject" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Message" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsRead" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="BalanceTbl">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="550" FixedLength="false" Unicode="true" />
+          <Property Name="ActiveDollars" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Acc_Num" Type="String" MaxLength="550" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="signup_table">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FullName" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="username" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="email" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="password" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="conf_password" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Account_No" Type="String" MaxLength="550" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="tbl_Transaction">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="From_Acc" Type="String" MaxLength="550" FixedLength="false" Unicode="true" />
+          <Property Name="To_Acc" Type="String" MaxLength="550" FixedLength="false" Unicode="true" />
+          <Property Name="Amount" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="DateTime" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="IsRead_Sent" Type="Boolean" />
+          <Property Name="IsRead_Received" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="User_Notifications">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Admin_reply" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="IsRead" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="address_details">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="trans_id" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Full_Name" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="phone_num" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="email" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="city" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="address_type" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="username" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="cartItem">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="trans_id" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="price" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="name" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="product" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="quantity" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="cart" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="total" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="username" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="tbl_stripeDashboard">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="trans_id" Type="Int64" />
+          <Property Name="Balnc_ID" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="amount" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="currency" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="description" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="email" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="date" Type="DateTime" Precision="3" />
+          <Property Name="username" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="risk" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="risk_level" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Brand" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="status" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="fingerprint" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="last4" Type="Int64" />
+          <Property Name="ExpMonth" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ExpYear" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="ForgotPassword">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="username" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="guid" Type="String" MaxLength="350" FixedLength="false" Unicode="true" />
+          <Property Name="createdOn" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="resetExtra">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="username" Type="String" MaxLength="450" FixedLength="false" Unicode="true" />
+          <Property Name="code" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="MoneyGatewaydbModelStoreContainer" CdmEntityContainer="MoneyGatewaydbEntities11">
+          <EntitySetMapping Name="Admin_NotificationTbl">
+            <EntityTypeMapping TypeName="MoneyGatewaydbModel.Admin_NotificationTbl">
+              <MappingFragment StoreEntitySet="Admin_NotificationTbl">
+                <ScalarProperty Name="IsRead" ColumnName="IsRead" />
+                <ScalarProperty Name="Message" ColumnName="Message" />
+                <ScalarProperty Name="Subject" ColumnName="Subject" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BalanceTbls">
+            <EntityTypeMapping TypeName="MoneyGatewaydbModel.BalanceTbl">
+              <MappingFragment StoreEntitySet="BalanceTbl">
+                <ScalarProperty Name="Acc_Num" ColumnName="Acc_Num" />
+                <ScalarProperty Name="ActiveDollars" ColumnName="ActiveDollars" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="signup_table">
+            <EntityTypeMapping TypeName="MoneyGatewaydbModel.signup_table">
+              <MappingFragment StoreEntitySet="signup_table">
+                <ScalarProperty Name="Account_No" ColumnName="Account_No" />
+                <ScalarProperty Name="conf_password" ColumnName="conf_password" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_Transaction">
+            <EntityTypeMapping TypeName="MoneyGatewaydbModel.tbl_Transaction">
+              <MappingFragment StoreEntitySet="tbl_Transaction">
+                <ScalarProperty Name="IsRead_Received" ColumnName="IsRead_Received" />
+                <ScalarProperty Name="IsRead_Sent" ColumnName="IsRead_Sent" />
+                <ScalarProperty Name="DateTime" ColumnName="DateTime" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="To_Acc" ColumnName="To_Acc" />
+                <ScalarProperty Name="From_Acc" ColumnName="From_Acc" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="User_Notifications">
+            <EntityTypeMapping TypeName="MoneyGatewaydbModel.User_Notifications">
+              <MappingFragment StoreEntitySet="User_Notifications">
+                <ScalarProperty Name="IsRead" ColumnName="IsRead" />
+                <ScalarProperty Name="Admin_reply" ColumnName="Admin_reply" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="address_details">
+            <EntityTypeMapping TypeName="MoneyGatewaydbModel.address_details">
+              <MappingFragment StoreEntitySet="address_details">
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="address_type" ColumnName="address_type" />
+                <ScalarProperty Name="city" ColumnName="city" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="phone_num" ColumnName="phone_num" />
+                <ScalarProperty Name="Full_Name" ColumnName="Full_Name" />
+                <ScalarProperty Name="trans_id" ColumnName="trans_id" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="cartItems">
+            <EntityTypeMapping TypeName="MoneyGatewaydbModel.cartItem">
+              <MappingFragment StoreEntitySet="cartItems">
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="total" ColumnName="total" />
+                <ScalarProperty Name="cart" ColumnName="cart" />
+                <ScalarProperty Name="quantity" ColumnName="quantity" />
+                <ScalarProperty Name="product" ColumnName="product" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="trans_id" ColumnName="trans_id" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_stripeDashboard">
+            <EntityTypeMapping TypeName="MoneyGatewaydbModel.tbl_stripeDashboard">
+              <MappingFragment StoreEntitySet="tbl_stripeDashboard">
+                <ScalarProperty Name="ExpYear" ColumnName="ExpYear" />
+                <ScalarProperty Name="ExpMonth" ColumnName="ExpMonth" />
+                <ScalarProperty Name="last4" ColumnName="last4" />
+                <ScalarProperty Name="fingerprint" ColumnName="fingerprint" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="Brand" ColumnName="Brand" />
+                <ScalarProperty Name="risk_level" ColumnName="risk_level" />
+                <ScalarProperty Name="risk" ColumnName="risk" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="currency" ColumnName="currency" />
+                <ScalarProperty Name="amount" ColumnName="amount" />
+                <ScalarProperty Name="Balnc_ID" ColumnName="Balnc_ID" />
+                <ScalarProperty Name="trans_id" ColumnName="trans_id" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ForgotPasswords">
+            <EntityTypeMapping TypeName="MoneyGatewaydbModel.ForgotPassword">
+              <MappingFragment StoreEntitySet="ForgotPassword">
+                <ScalarProperty Name="createdOn" ColumnName="createdOn" />
+                <ScalarProperty Name="guid" ColumnName="guid" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="resetExtras">
+            <EntityTypeMapping TypeName="MoneyGatewaydbModel.resetExtra">
+              <MappingFragment StoreEntitySet="resetExtra">
+                <ScalarProperty Name="code" ColumnName="code" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

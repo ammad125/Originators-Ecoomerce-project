@@ -1,0 +1,151 @@
+﻿@model List<MoneyTransfer.Database.tbl_stripeDashboard>
+@{
+    ViewBag.Title = "stripeTransactions";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<style>
+    * {
+        box-sizing: border-box;
+    }
+
+    #myInput {
+        background-image: url('/css/searchicon.png');
+        background-position: 10px 10px;
+        background-repeat: no-repeat;
+        width: 100%;
+        height: 42px;
+        font-size: 16px;
+        padding: 12px 20px 12px 40px;
+        border: 1px solid #ddd;
+        margin-bottom: 12px;
+        color: white;
+        background-color: #14142a;
+    }
+
+    #myTable {
+        border-collapse: collapse;
+        width: 100%;
+        /*border: 1px solid #ddd;*/
+        font-size: 18px;
+    }
+
+        #myTable th, #myTable td {
+            text-align: left;
+            padding: 12px;
+        }
+
+        #myTable tr {
+            border-bottom: 1px solid #ddd;
+        }
+
+
+    .table {
+        text-align: center;
+    }
+
+    input {
+        color: aqua;
+        background-color: black;
+        height: 35px;
+        width: 130px;
+    }
+
+    .reply {
+        width: 100px;
+    }
+</style>
+
+<div class="page-area">
+    <div class="breadcumb-overlay"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="breadcrumb text-center">
+                    <div class="section-headline white-headline text-center">
+                        <h3>Stripe Dashboard</h3>
+                    </div>
+                    <ul>
+                        <li class="home-bread">Dashboard</li>
+                        <li>Stripe Dashboard</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="how-to-area bg-color area-padding">
+    <div class="all-services">
+        <div class="container">
+            <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for Transaction ID.." title="Type in a name">
+            <table class="table table-bordered table-dark" id="myTable">
+                <thead>
+                    <tr>
+                        <th style="text-align: center">Tr: ID</th>
+                        <th style="text-align: center">Username</th>
+                        <th style="text-align: center">Amount</th>
+                        <th style="text-align: center">Currency</th>
+                        <th style="text-align: center">Discription</th>
+                        <th style="text-align: center">Email</th>
+                        <th style="text-align: center">Date & Time</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.trans_id</td>
+                            <td>@item.username</td>
+                            <td>@item.amount</td>
+                            <td>@item.currency</td>
+                            <td>@item.description</td>
+                            <td>@item.email</td>
+                            <td>@item.date</td>w
+                        </tr>
+                    }
+                </tbody>
+
+            </table>
+        </div>
+    </div>
+</div>
+
+<script>
+    //function myFunction() {
+    //  var input, filter, table, tr, td, i, txtValue;
+    //  input = document.getElementById("myInput");
+    //  filter = input.value.toUpperCase();
+    //  table = document.getElementById("myTable");
+    //  tr = table.getElementsByTagName("tr");
+    //  for (i = 0; i < tr.length; i++) {
+    //    td = tr[i].getElementsByTagName("td")[0];
+    //    if (td) {
+    //      txtValue = td.textContent || td.innerText;
+    //      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+    //        tr[i].style.display = "";
+    //      } else {
+    //        tr[i].style.display = "none";
+    //      }
+    //    }
+    //  }
+    //}
+
+    function filterTable(event) {
+        var filter = event.target.value.toUpperCase();
+        var rows = document.querySelector("#myTable tbody").rows;
+
+        for (var i = 0; i < rows.length; i++) {
+            var firstCol = rows[i].cells[0].textContent.toUpperCase();
+            var secondCol = rows[i].cells[1].textContent.toUpperCase();
+            var thirdCol = rows[i].cells[2].textContent.toUpperCase();
+            var fourCol = rows[i].cells[5].textContent.toUpperCase();
+            if (firstCol.indexOf(filter) > -1 || secondCol.indexOf(filter) > -1 || thirdCol.indexOf(filter) > -1 || fourCol.indexOf(filter) > -1) {
+                rows[i].style.display = "";
+            } else {
+                rows[i].style.display = "none";
+            }
+        }
+    }
+    document.querySelector('#myInput').addEventListener('keyup', filterTable, false);
+</script>

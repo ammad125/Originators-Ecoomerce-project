@@ -1,0 +1,141 @@
+﻿@model MoneyTransfer.Database.signup_table
+@{
+    ViewBag.Title = "Update";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<!doctype html>
+<html class="no-js" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Signup</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- favicon -->
+    <link rel="shortcut icon" type="image/x-icon" href="img/logo/favicon.ico">
+
+    <!-- all css here -->
+    <!-- bootstrap v3.3.6 css -->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <!-- font-icon css -->
+    <link rel="stylesheet" href="css/themify-icons.css">
+    <!-- style css -->
+    <link rel="stylesheet" href="style.css">
+    <!-- responsive css -->
+    <link rel="stylesheet" href="css/responsive.css">
+
+    <!-- modernizr css -->
+    <script src="js/vendor/modernizr-2.8.3.min.js"></script>
+
+    <style>
+        .img {
+            float: left;
+            border-radius: 2px;
+            height: 49px;
+            width: 50px;
+            margin-bottom: -80px;
+            margin-left: 83%;
+        }
+    </style>
+
+</head>
+
+<body data-spy="scroll" data-target="#navbar-example">
+    <div class="login-area area-padding fix">
+        <div class="login-overlay"></div>
+        <div class="table">
+            <div class="table-cell">
+                <div class="container">
+                    <div class="row">
+                        <br /><br /><br />
+                        <div class="col-md-offset-3 col-md-6 col-sm-offset-2 col-sm-8 col-xs-12">
+                            <div class="login-form signup-form">
+                                <h4 class="login-title text-center">Update User</h4>
+                                <div class="row">
+                                    @using (Html.BeginForm("Update", "Admin", FormMethod.Post, new { id = "userform" }))
+                                    {
+                                        <div class="col-md-12 col-sm-12 col-xs-12">
+                                            @Html.HiddenFor(x => x.Id)
+                                            @Html.TextBoxFor(x => x.FullName, new { placeholder = "FullName", @class = "form-control", @required = "required" })
+                                        </div>
+                                        <div class="col-md-12 col-sm-12 col-xs-12">
+                                            @Html.HiddenFor(x => x.Id)
+                                            @Html.TextBoxFor(x => x.username, new { placeholder = "Username", @class = "form-control", @required = "required" })
+                                        </div>
+                                        <div class="col-md-12 col-sm-12 col-xs-12">
+                                            @Html.TextBoxFor(x => x.email, new { placeholder = "Email", @class = "form-control", @required = "required" })
+                                        </div>
+
+                                        <div class="col-md-12 col-sm-12 col-xs-12">
+                                            <span><img class="img" onclick="myFunctionPass()" src="~/Content/img/background/eye-1792481.png" /></span>
+                                            @Html.TextBoxFor(x => x.password, new { @type = "password", placeholder = "Password", @class = "form-control", @required = "required" })
+                                        </div>
+
+                                        @*<div class="col-md-12 col-sm-12 col-xs-12">
+                                                @Html.TextBoxFor(x => x.conf_password, new { placeholder = "Confirm Password", @class = "form-control", @required = "required" })
+                                            </div>*@
+                                        @Html.HiddenFor(x => x.Account_No)
+                                        <div class="col-md-12 col-sm-12 col-xs-12 text-center">
+                                            <div class="check-group flexbox">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12 col-sm-12 col-xs-12 text-center">
+                                            <button type="submit" onclick="checkLogin()" class="slide-btn login-btn" id="submit">Update</button>
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Slider Area -->
+    <!-- all js here -->
+    <!-- jquery latest version -->
+    <script src="js/vendor/jquery-1.12.4.min.js"></script>
+    <!-- bootstrap js -->
+    <script src="js/bootstrap.min.js"></script>
+    <!-- Form validator js -->
+    <script src="js/form-validator.min.js"></script>
+    <!-- plugins js -->
+    <script src="js/plugins.js"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.js"></script>
+    <script src="~/scripts/Validation.js"></script>
+    <script>
+
+        function myFunctionPass() {
+            var x = document.getElementById("password");
+            if (x.type === "password") {
+                x.type = "text";
+            } else {
+                x.type = "password";
+            }
+        }
+
+        //function myFunctionConf_Pass() {
+        //    var x = document.getElementById("conf_pass");
+        //    if (x.type === "password") {
+        //        x.type = "text";
+        //    } else {
+        //        x.type = "password";
+        //    }
+        //}
+
+
+        function checkLogin() {
+            var $regForm = $("#userform");
+            if ($regForm.valid()) {
+                $($regForm)[0].submit();
+                $($regForm)[0].reset();
+            }
+        }
+    </script>
+</body>
+</html>

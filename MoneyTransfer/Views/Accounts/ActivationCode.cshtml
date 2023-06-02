@@ -1,0 +1,139 @@
+﻿
+@{
+    ViewBag.Title = "ActivationCode";
+    //Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!doctype html>
+<html class="no-js" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="shortcut icon" type="image/x-icon" href="img/logo/favicon.ico">
+
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/themify-icons.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <!-- all css here -->
+    <!-- bootstrap v3.3.6 css -->
+    <link rel="stylesheet" href="~/content/css/bootstrap.min.css">
+    <!-- owl.carousel css -->
+    <link rel="stylesheet" href="~/content/css/owl.carousel.css">
+    <link rel="stylesheet" href="~/content/css/owl.transitions.css">
+    <!-- Animate css -->
+    <link rel="stylesheet" href="~/content/css/animate.css">
+    <!-- Nice-select css -->
+    <link rel="stylesheet" href="~/content/css/nice-select.css">
+    <!-- meanmenu css -->
+    <link rel="stylesheet" href="~/content/css/meanmenu.min.css">
+    <!-- font-awesome css -->
+    <link rel="stylesheet" href="~/content/css/font-awesome.min.css">
+    <link rel="stylesheet" href="~/content/css/themify-icons.css">
+    <link rel="stylesheet" href="~/content/css/flaticon.css">
+    <!-- magnific css -->
+    <link rel="stylesheet" href="~/content/css/magnific.min.css">
+    <!-- style css -->
+    <link rel="stylesheet" href="~/content/style.css">
+    <!-- responsive css -->
+    <link rel="stylesheet" href="~/content/css/responsive.css">
+
+    <!-- modernizr css -->
+    <script src="~/content/js/vendor/modernizr-2.8.3.min.js"></script>
+
+    <script src="js/vendor/modernizr-2.8.3.min.js"></script>
+
+    <style>
+        /* The message box is shown when the user clicks on the password field */
+        #message {
+            display: none;
+            /*background: #1d7d7d;*/
+            color: #000;
+            position: relative;
+            padding: 20px;
+            margin-top: 320px;
+            text-align: center;
+            width: 100%;
+            /*margin: 318px 240px 0px 0px;*/
+            margin: 5px 240px 0px 60px;
+        }
+
+            #message p {
+                padding: 10px 35px;
+                font-size: 18px;
+            }
+
+        /* Add a green text color and a checkmark when the requirements are right */
+        .valid {
+            color: green;
+        }
+
+            .valid:before {
+                position: relative;
+                left: -35px;
+                content: "✔";
+            }
+
+        /* Add a red text color and an "x" when the requirements are wrong */
+        .invalid {
+            color: red;
+        }
+
+            .invalid:before {
+                position: relative;
+                left: -35px;
+                content: "✖";
+            }
+    </style>
+
+</head>
+<body>
+    <div class="login-area area-padding fix" style="height: 100%;">
+        <div class="login-overlay"></div>
+        <div class="table">
+            <div class="table-cell">
+                <div class="container">
+                    <div class="row">
+
+                        <br /><br /><br />
+
+                        <div class="col-md-offset-3 col-md-6 col-sm-offset-2 col-sm-8 col-xs-12">
+                            <div class="login-form signup-form">
+                                <h4 class="login-title text-center">Please Enter Activation Code</h4>
+
+                                <div style="color: #1af2f2; margin-left: -15px;">@TempData["UpdatePass"]</div>
+                                <div style="color: red; margin-left: -15px;">@TempData["MatchPwd"]</div>
+                                <div style="color: red; margin-left: -15px;">@TempData["linkExpire"]</div>
+
+                                @using (Html.BeginForm("Confirm_Code", "Accounts", FormMethod.Post, new { id = "userform" }))
+                                {
+                                    <div class="row">
+
+                                        <input class="form-control" type="text" id="code" name="Act_code" placeholder="Enter Activation Code" required>
+
+                                        <div class="col-md-12 col-sm-12 col-xs-12 text-center">
+                                            <button class="slide-btn login-btn" type="submit">Enter</button>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/vendor/jquery-1.12.4.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/form-validator.min.js"></script>
+    <script src="js/plugins.js"></script>
+
+    <script src="~/Scripts/jquery.validate.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+
+</body>
+</html>

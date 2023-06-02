@@ -1,0 +1,150 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Download</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js"></script>
+
+    <!-- all css here -->
+    <!-- bootstrap v3.3.6 css -->
+    <link rel="stylesheet" href="~/content/css/bootstrap.min.css">
+    <!-- owl.carousel css -->
+    <link rel="stylesheet" href="~/content/css/owl.carousel.css">
+    <link rel="stylesheet" href="~/content/css/owl.transitions.css">
+    <!-- Animate css -->
+    <link rel="stylesheet" href="~/content/css/animate.css">
+    <!-- Nice-select css -->
+    <link rel="stylesheet" href="~/content/css/nice-select.css">
+    <!-- meanmenu css -->
+    <link rel="stylesheet" href="~/content/css/meanmenu.min.css">
+    <!-- font-awesome css -->
+    <link rel="stylesheet" href="~/content/css/font-awesome.min.css">
+    <link rel="stylesheet" href="~/content/css/themify-icons.css">
+    <link rel="stylesheet" href="~/content/css/flaticon.css">
+    <!-- magnific css -->
+    <link rel="stylesheet" href="~/content/css/magnific.min.css">
+    <!-- style css -->
+    <link rel="stylesheet" href="~/content/style.css">
+    <!-- responsive css -->
+    <link rel="stylesheet" href="~/content/css/responsive.css">
+
+    <!-- modernizr css -->
+    <script src="~/content/js/vendor/modernizr-2.8.3.min.js"></script>
+
+
+    <!-- all js here -->
+    <!-- jquery latest version -->
+    <script src="~/content/js/vendor/jquery-1.12.4.min.js"></script>
+    <!-- bootstrap js -->
+    <script src="~/content/js/bootstrap.min.js"></script>
+    <!-- owl.carousel js -->
+    <script src="~/content/js/owl.carousel.min.js"></script>
+    <!-- stellar js -->
+    <script src="~/content/js/jquery.stellar.min.js"></script>
+    <!-- magnific js -->
+    <script src="~/content/js/magnific.min.js"></script>
+    <!-- Nice-select js -->
+    <script src="~/content/js/jquery.nice-select.min.js"></script>
+    <!-- wow js -->
+    <script src="~/content/js/wow.min.js"></script>
+    <!-- meanmenu js -->
+    <script src="~/content/js/jquery.meanmenu.js"></script>
+    <!-- Form validator js -->
+    <script src="~/content/js/form-validator.min.js"></script>
+    <!-- plugins js -->
+    <script src="~/content/js/plugins.js"></script>
+    <!-- main js -->
+    <script src="~/content/js/main.js"></script>
+
+    <script src="~/Scripts/jquery.validate.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+
+
+    <style>
+        .modal {
+            background-color: blue;
+        }
+
+        #createPDF {
+            background-color: darkslateblue;
+            color: #fff;
+            width: 32%;
+            height: 40px;
+        }
+
+        #apply {
+            width: 35%;
+            height: 7%;
+            font-size: 22px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="page-area">
+        <div class="breadcumb-overlay"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="breadcrumb text-center">
+                        <div class="section-headline white-headline text-center">
+                            <h3>Click Below To Download Invoice</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="dsahboard-area bg-color area-padding">
+        <div class="row">
+            <div class="col-md-4 col-sm-4 col-xs-4" style="margin: -199px 450px;">
+                <div class="single-dash-head">
+                    <h2><i class="ti-arrow-down"></i></h2>
+                    <button id="createPDF">Download</button><br /><br />
+                    <a href="/Home/SendMoney" class="btn btn-primary" id="apply">Back</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <input type="text" id="Tran_Invoice" value="Transaction Invoice" hidden />
+
+    <input type="text" id="From_Invoice" value="From Account: " hidden />
+    <input type="text" id="FromAcc" value="@ViewBag.FromAcc" hidden />
+    <input type="text" id="To_Invoice" value="To Account: " hidden />
+    <input type="text" id="ToAcc" value="@ViewBag.ToAcc" hidden />
+    <input type="text" id="Amount_Invoice" value="Amount: " hidden />
+    <input type="text" id="Amount" value="@ViewBag.Amount" hidden />
+    <input type="text" id="Date_Invoice" value="Date: " hidden />
+    <input type="text" id="Date" value="@ViewBag.Date" hidden />
+
+    <script type="text/javascript">
+        $("#createPDF").click(function () {
+            var doc = new jsPDF();
+
+            doc.text($("#Tran_Invoice").val(), 10, 10);
+
+            doc.text($("#From_Invoice").val(), 10, 30);
+            doc.text($("#FromAcc").val(), 50, 30);
+
+            doc.text($("#To_Invoice").val(), 10, 40);
+            doc.text($("#ToAcc").val(), 43, 40);
+
+            doc.text($("#Amount_Invoice").val(), 10, 50);
+            doc.text($("#Amount").val(), 33, 50);
+
+            doc.text($("#Date_Invoice").val(), 10, 60);
+            doc.text($("#Date").val(), 26, 60);
+
+            doc.save("Invoice.pdf");
+        });
+    </script>
+</body>
+</html>

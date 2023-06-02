@@ -1,0 +1,70 @@
+﻿
+@{
+    ViewBag.Title = "Settings";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!doctype html>
+<html class="no-js" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Reply To User</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="shortcut icon" type="image/x-icon" href="img/logo/favicon.ico">
+
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/themify-icons.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+
+    <script src="js/vendor/modernizr-2.8.3.min.js"></script>
+</head>
+<body data-spy="scroll" data-target="#navbar-example">
+    <div class="login-area area-padding fix">
+        <div class="login-overlay"></div>
+        <div class="table">
+            <div class="table-cell">
+                <div class="container">
+                    <div class="row">
+
+                        <br /><br /><br />
+
+                        <div class="col-md-offset-3 col-md-6 col-sm-offset-2 col-sm-8 col-xs-12">
+                            <div class="login-form signup-form">
+                                <h4 class="login-title text-center">Change Password</h4>
+
+                                <div style="color: #1af2f2; margin-left: -15px;">@TempData["UpdatePass"]</div>
+                                <div style="color: red; margin-left: -15px;">@TempData["NoMatch"]</div>
+                                <div style="color: #50fced; margin-left: -15px;">@TempData["Match"]</div>
+                                <div style="color: red; margin-left: -15px;">@TempData["linkExpire"]</div>
+                                <div style="color: red; margin-left: -15px;">@TempData["MatchPwd"]</div>
+
+                                @using (Html.BeginForm("change", "Accounts", FormMethod.Post))
+                                {
+                                    <div class="row">
+                                        <input class="form-control" type="text" name="Password_name" placeholder="Current Password">
+
+                                        <div class="col-md-12 col-sm-12 col-xs-12 text-center">
+                                            <button class="slide-btn login-btn" type="submit">Continue</button>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/vendor/jquery-1.12.4.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/form-validator.min.js"></script>
+    <script src="js/plugins.js"></script>
+
+</body>
+</html>

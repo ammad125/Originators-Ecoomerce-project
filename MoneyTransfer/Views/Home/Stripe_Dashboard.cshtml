@@ -1,0 +1,165 @@
+﻿@model List<MoneyTransfer.Database.tbl_stripeDashboard>
+@{
+    ViewBag.Title = "Stripe_Dashboard";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    #myInput {
+        background-image: url('/css/searchicon.png');
+        background-position: 10px 10px;
+        background-repeat: no-repeat;
+        width: 100%;
+        height: 42px;
+        font-size: 16px;
+        border: 1px solid #ddd;
+        margin-bottom: 12px;
+        margin-left: -36px;
+        color: white;
+        padding: 20px;
+        background-color: #14142a;
+    }
+
+    input {
+        color: aqua;
+        background-color: black;
+        height: 35px;
+    }
+
+    .more {
+        background-color: cadetblue;
+        color: #fff;
+    }
+
+    .form-top {
+        background: #1ba8c6;
+        padding: 15px 20px;
+        margin-bottom: -20px;
+    }
+</style>
+
+<div class="page-area">
+    <div class="breadcumb-overlay"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="breadcrumb text-center">
+                    <div class="section-headline white-headline text-center">
+                        <h3>Stripe Dashboard</h3>
+                    </div>
+                    <ul>
+                        <li class="home-bread">Dashboard</li>
+                        <li>Stripe Dashboard</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End breadcrumbs area -->
+<div class="dsahboard-area bg-color area-padding">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3 col-sm-3 col-xs-12">
+                <aside class="sidebar">
+                    <div class="dashboard-side">
+                        <ul>
+                            <li><a href="SendMoney"><i class="ti-new-window"></i>Send Money</a></li>
+                            <li>
+                                <a href="ReceivedMoney">
+                                    <i class="fa fa-money"></i>Received Money
+                                    <label id="lblNotiCount_Received" style="color: white; background-color: red; border-radius: 10px; text-align: center; padding: 0 5px 0px 5px;"></label>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="SentMoney">
+                                    <i class="fa fa-money"></i>Sent Money
+                                    <label id="lblNotiCount_Sent" style="color: white; background-color: red; border-radius: 10px; text-align: center; padding: 0 5px 0px 5px;"></label>
+                                </a>
+                            </li>
+                            <li class="active"><a href="~/Home/Stripe_Dashboard"><i class="ti-wallet"></i>Stripe Dashboard</a></li>
+                            <li><a href="Index"><i class="ti-stats-up"></i>Currency Exchange</a></li>
+                            <li><a href="Settings"><i class="ti-settings"></i>Settings</a></li>
+                        </ul>
+                    </div>
+                    <div class="dashboard-support">
+                        <div class="support-inner">
+                            <div class="help-support">
+                                <i class="flaticon-107-speech-bubbles"></i>
+                                <a href="contact.html"><span class="help-text">Need Help?</span></a>
+                            </div>
+                        </div>
+                    </div>
+                </aside>
+            </div>
+            <div class="col-md-9 col-sm-9 col-xs-12">
+                <div class="dashboard-content">
+                    <div class="row">
+                        <div class="col-md-16 col-sm-14 col-xs-16">
+                            <div class="send-money-form">
+                                <div class="form-text">
+                                    <h4 class="form-top">Transaction History</h4>
+                                    <div class="form-inner" style="width: 947px;">
+
+                                        <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search..." title="Type in a name">
+
+                                        <table class="table table-bordered table-dark text-center" style="margin-left: -35px;" id="myTable">
+                                            <thead>
+                                                <tr>
+                                                    <th style="text-align: center">Tr: ID</th>
+                                                    <th style="text-align: center">Amount</th>
+                                                    <th style="text-align: center">Currency</th>
+                                                    <th style="text-align: center">Discription</th>
+                                                    <th style="text-align: center">Email</th>
+                                                    <th style="text-align: center">Date & Time</th>
+                                                    <th style="text-align: center">More</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach (var item in Model)
+                                                {
+                                                    <tr>
+                                                        <td>@item.trans_id</td>
+                                                        <td>@item.amount</td>
+                                                        <td>@item.currency</td>
+                                                        <td>@item.description</td>
+                                                        <td>@item.email</td>
+                                                        <td>@item.date</td>
+                                                        <td>
+                                                            <a href="@Url.Action("MoreInfo", new { @item.trans_id })"><input type="button" value="Click" class="more" /></a>
+                                                        </td>
+                                                    </tr>
+                                                }
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function filterTable(event) {
+        var filter = event.target.value.toUpperCase();
+        var rows = document.querySelector("#myTable tbody").rows;
+
+        for (var i = 0; i < rows.length; i++) {
+            var firstCol = rows[i].cells[0].textContent.toUpperCase();
+            var secondCol = rows[i].cells[1].textContent.toUpperCase();
+            var thirdCol = rows[i].cells[4].textContent.toUpperCase();
+            var fourCol = rows[i].cells[5].textContent.toUpperCase();
+
+            if (firstCol.indexOf(filter) > -1 || secondCol.indexOf(filter) > -1 || thirdCol.indexOf(filter) > -1 || fourCol.indexOf(filter) > -1) {
+                rows[i].style.display = "";
+            } else {
+                rows[i].style.display = "none";
+            }
+        }
+    }
+    document.querySelector('#myInput').addEventListener('keyup', filterTable, false);
+</script>

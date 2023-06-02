@@ -1,0 +1,119 @@
+﻿@model List<MoneyTransfer.Database.tbl_stripeDashboard>
+@{
+    ViewBag.Title = "MoreInfo";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    .back{
+        color: #fff; 
+        background-color: cadetblue; 
+        margin: 28px 0 0 380px; 
+        border: none; 
+        font-size: 20px;
+        width: 80px; 
+        height: 40px; 
+        cursor: pointer;
+    }
+
+    input {
+        color: aqua;
+        background-color: black;
+        height: 35px;
+    }
+
+    .more {
+        background-color: cadetblue;
+        color: #fff;
+    }
+</style>
+
+<div class="page-area">
+    <div class="breadcumb-overlay"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="breadcrumb text-center">
+                    <div class="section-headline white-headline text-center">
+                        <h3>Stripe Dashboard</h3>
+                    </div>
+                    <ul>
+                        <li class="home-bread">Dashboard</li>
+                        <li>Stripe Dashboard</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End breadcrumbs area -->
+<div class="dsahboard-area bg-color area-padding">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3 col-sm-3 col-xs-12">
+                <aside class="sidebar">
+                    <div class="dashboard-side">
+                        <ul>
+                            <li><a href="SendMoney"><i class="ti-new-window"></i>Send Money</a></li>
+                            <li>
+                                <a href="ReceivedMoney">
+                                    <i class="fa fa-money"></i>Received Money
+                                    <label id="lblNotiCount_Received" style="color: white; background-color: red; border-radius: 10px; text-align: center; padding: 0 5px 0px 5px;"></label>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="SentMoney">
+                                    <i class="fa fa-money"></i>Sent Money
+                                    <label id="lblNotiCount_Sent" style="color: white; background-color: red; border-radius: 10px; text-align: center; padding: 0 5px 0px 5px;"></label>
+                                </a>
+                            </li>
+                            <li class="active"><a href="~/Home/Stripe_Dashboard"><i class="ti-wallet"></i>Stripe Dashboard</a></li>
+                            <li><a href="Index"><i class="ti-stats-up"></i>Currency Exchange</a></li>
+                            <li><a href="Settings"><i class="ti-settings"></i>Settings</a></li>
+                        </ul>
+                    </div>
+                    <div class="dashboard-support">
+                        <div class="support-inner">
+                            <div class="help-support">
+                                <i class="flaticon-107-speech-bubbles"></i>
+                                <a href="contact.html"><span class="help-text">Need Help?</span></a>
+                            </div>
+                        </div>
+                    </div>
+                </aside>
+            </div>
+            <div class="col-md-9 col-sm-9 col-xs-12">
+                <div class="dashboard-content">
+                    <div class="row">
+                        <div class="col-md-16 col-sm-14 col-xs-16">
+                            <div class="send-money-form">
+                                <div class="form-text">
+                                    <h4 class="form-top">Transaction History</h4>
+                                    <div class="form-inner" style="width: 947px;">
+
+                                        <div class="col-md-12 col-sm-12 col-xs-12" style="text-align: center;">
+
+                                            <h5><u style="font-size: 22px; color: cornflowerblue;">Transaction Id: </u> &nbsp; <span>@Model[0].trans_id</span></h5>
+                                            <h5><u style="font-size: 22px; color: cornflowerblue;">Balance Id:  </u> &nbsp; <span>@Model[0].Balnc_ID</span></h5>
+                                            <h5><u style="font-size: 22px; color: cornflowerblue;">Risk:  </u> &nbsp;  <span>@Model[0].risk</span></h5>
+                                            <h5><u style="font-size: 22px; color: cornflowerblue;">Risk Level: </u> &nbsp;  <span>@Model[0].risk_level</span></h5>
+                                            <h5><u style="font-size: 22px; color: cornflowerblue;">Brand: </u> &nbsp;  <span>@Model[0].Brand</span></h5>
+                                            <h5><u style="font-size: 22px; color: cornflowerblue;">Status: </u> &nbsp;  <span>@Model[0].status</span></h5>
+                                            <h5><u style="font-size: 22px; color: cornflowerblue;">Fingerprint: </u> &nbsp; <span>@Model[0].fingerprint</span></h5>
+                                            <h5><u style="font-size: 22px; color: cornflowerblue;">Last 4 Digits: </u> &nbsp; <span>@Model[0].last4</span></h5>
+                                            <h5><u style="font-size: 22px; color: cornflowerblue;">Expiry Month: </u> &nbsp; <span>@Model[0].ExpMonth</span></h5>
+                                            <h5><u style="font-size: 22px; color: cornflowerblue;">Expiry Year: </u> &nbsp; <span>@Model[0].ExpYear</span></h5>
+
+                                        </div>
+
+                                        <a href="@Url.Action("Stripe_Dashboard")"><input type="button" value="Back" class="back" /></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

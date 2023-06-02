@@ -1,0 +1,105 @@
+﻿@model MoneyTransfer.Database.User_Notifications
+@{
+    ViewBag.Title = "Reply";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<!doctype html>
+<html class="no-js" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Reply To User</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="shortcut icon" type="image/x-icon" href="img/logo/favicon.ico">
+
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/themify-icons.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+
+    <script src="js/vendor/modernizr-2.8.3.min.js"></script>
+</head>
+<body data-spy="scroll" data-target="#navbar-example">
+    <div class="login-area area-padding fix">
+        <div class="login-overlay"></div>
+        <div class="table">
+            <div class="table-cell">
+                <div class="container">
+                    <div class="row">
+
+                        <br /><br /><br />
+
+                        <div class="col-md-offset-3 col-md-6 col-sm-offset-2 col-sm-8 col-xs-12">
+                            <div class="login-form signup-form">
+                                <h4 class="login-title text-center">Reply To @TempData["name"]</h4>
+
+                                <div id="messageEmpty" style="color: red;"></div>
+
+                                <div class="row">
+                                    <form>
+                                        <div class="col-md-6 col-sm-6 col-xs-12">
+
+                                            @Html.TextAreaFor(x => x.Admin_reply, new { placeholder = "Type Message", @Id = "response", @class = "form-control", @required = "required", style = "width: 355px; Height: 100px;" })
+
+                                        </div>
+
+                                        <div class="col-md-12 col-sm-12 col-xs-12 text-center">
+                                            <button type="button" onclick="btnClick()" id="submit" class="slide-btn login-btn">Send</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="js/vendor/jquery-1.12.4.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/form-validator.min.js"></script>
+    <script src="js/plugins.js"></script>
+
+    <input type="hidden" value="@TempData["username"]" id="username" />
+
+    <script>
+        function btnClick() {
+            var value = $("#username").val();
+            var res = $("#response").val();
+
+            if (res == null || res == "") {
+                $("#messageEmpty").html("Message field can't be empty!!");
+                //alert("Message field can't be empty!!");
+            }
+
+            else {
+                var obj = {
+                    UserName: value,
+                    Admin_reply: res
+                }
+
+                SubmitForm(obj);
+            }
+        }
+
+        function SubmitForm(obj) {
+            $.ajax({
+                url: "/Admin/UserReply",
+                method: "POST",
+                data: obj,
+                success: function (data) {
+                    $("#response").val("");
+                },
+                error: function (err) {
+                    console.error(err);
+                }
+            })
+        }
+    </script>
+
+</body>
+</html>

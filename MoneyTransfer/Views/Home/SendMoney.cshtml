@@ -1,0 +1,336 @@
+﻿@model MoneyTransfer.Database.BalanceTbl
+@{
+    ViewBag.Title = "SendMoney";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+<style>
+    p {
+        color: black;
+    }
+
+    .form-control {
+        color: #fff;
+    }
+</style>
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+
+    <div class="page-area">
+        <div class="breadcumb-overlay"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="breadcrumb text-center">
+                        <div class="section-headline white-headline text-center">
+                            <h3>Send Money</h3>
+                        </div>
+                        <ul>
+                            <li class="home-bread">Dashboard</li>
+                            <li>Send Money</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End breadcrumbs area -->
+    <div class="dsahboard-area bg-color area-padding">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="dashboard-head">
+                        <div class="row">
+                            <div class="col-md-3 col-sm-3 col-xs-12">
+                                <div class="single-dash-head">
+                                    <div class="dashboard-profile">
+                                        <div class="profile-content">
+                                            <img src="img/about/profile.png" alt="">
+                                            <span class="pro-name">@User.Identity.Name</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-4 col-xs-12" style="margin-left: 40px;">
+                                <div class="single-dash-head">
+                                    <div class="dashboard-amount">
+                                        <div class="amount-content">
+                                            <i class="flaticon-028-money"></i>
+                                            <span class="pro-name">Balance: $@ViewBag.Dollar</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-4 col-xs-12">
+                                <div class="single-dash-head">
+                                    <div class="dashboard-amount">
+                                        <div class="amount-content">
+                                            <a class="edit-icon" href="a-add-bank.html"><i class="ti-pencil-alt"></i></a>
+                                            <i class="flaticon-043-bank-2"></i>
+                                            <span class="pro-name">Account @ViewBag.Account</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3 col-sm-3 col-xs-12">
+                    <aside class="sidebar">
+                        <div class="dashboard-side">
+                            <ul>
+                                <li class="active"><a href="#"><i class="ti-new-window"></i>Send Money</a></li>
+                                <li>
+                                    <a href="ReceivedMoney">
+                                        <i class="fa fa-money"></i>Received Money
+                                        <label id="lblNotiCount_Received" style="color: white; background-color: red; border-radius: 10px; text-align: center; padding: 0 5px 0px 5px;"></label>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="SentMoney">
+                                        <i class="fa fa-money"></i>Sent Money
+                                        <label id="lblNotiCount_Sent" style="color: white; background-color: red; border-radius: 10px; text-align: center; padding: 0 5px 0px 5px;"></label>
+                                    </a>
+                                </li>
+                                <li><a href="~/Home/Stripe_Dashboard"><i class="ti-wallet"></i>Stripe Dashboard</a></li>
+                                <li><a href="Index"><i class="ti-stats-up"></i>Currency Exchange</a></li>
+                                <li><a href="Graph"><i class="fa fa-pie-chart"></i>Graphical Data</a></li>
+                                <li><a href="Settings"><i class="ti-settings"></i>Settings</a></li>
+                            </ul>
+                        </div>
+                        <div class="dashboard-support">
+                            <div class="support-inner">
+                                <div class="help-support">
+                                    <i class="flaticon-107-speech-bubbles"></i>
+                                    <a href="Contacts"><span class="help-text">Need Help?</span></a>
+                                </div>
+                            </div>
+                        </div>
+                    </aside>
+                </div>
+                <div class="col-md-9 col-sm-9 col-xs-12">
+                    <div class="dashboard-content">
+                        <div class="row">
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <div class="send-money-form">
+                                    <div class="form-text">
+                                        <h4 class="form-top">
+                                            Send Money &nbsp;
+                                            <span class="pro-name" style="color: red;">@TempData["load"]</span>
+                                        </h4>
+
+                                        <style>
+                                            /*.stripe-button-el span {
+                                            background-color:navy !important;
+                                            }*/
+                                            .stripe-button-el:hover{
+                                                background-color:white !important;
+                                            }
+                                             .stripe-button-el{
+                                                background-color:white !important;
+                                                border:none !important;
+                                            }
+                                        </style>
+                                        <div class="form-inner">
+                                            <h4>Your Total Bill: Rs @ViewBag.totalAmount</h4>
+                                            @*Final*@
+                                            <div id="tabs" style="width:730px">
+                                                <ul>
+                                                    <li><a href="#tabs-1">Stripe</a></li>
+                                                    <li><a href="#tabs-2">Jazzcash</a></li>
+                                                    <li><a href="#tabs-3">Paypal</a></li>
+                                                    <li><a href="#tabs-4">Easypaisa</a></li>
+                                                </ul>
+                                                <div id="tabs-1">
+                                                    <h3 style="color: #42e2ad">@ViewBag.Message</h3>
+
+                                                    <form action="/Home/Charge" method="POST">
+                                                        @if (ViewBag.totalAmount != null && ViewBag.totalAmount != 0)
+                                                        {
+                                                            <article>
+                                                                <label>Amount: @ViewBag.totalAmount.00</label><br /><br />
+                                                            </article>
+                                                            <input type="hidden" name="totalAmount" value="@ViewBag.totalAmount" />
+
+                                                            <script src="//checkout.stripe.com/v2/checkout.js"
+                                                                    class="stripe-button"
+                                                                    data-key="pk_test_51KabhVGJmCzbucdgVhFp1LZROBiQXGWLJieevq45wTM9He3RXmC6PcKIeVjHWnt03imwRHS2CatLB5OEgRHHpXhM00Ex0FDvkJ"
+                                                                    data-locale="auto"
+                                                                    data-description="Sample Charge"
+                                                                    data-amount="50">
+                                                            </script>
+                                                        }
+                                                        else
+                                                        {
+                                                            <article>
+                                                                <label>Your cart is empty</label><br /><br />
+                                                            </article>
+                                                        }
+
+                                                    </form>
+
+                                                </div>
+
+                                                <div id="tabs-2">
+
+                                                    Open Jazzcash App in your phone then scan QR CODE and send money
+                                                    <img src="~/Content/img/QR/JAZZCASH.BMP" style="height: 500px; margin:
+    20px 0  0 160px;" />
+
+                                                </div>
+
+                                                <div id="tabs-3">
+                                                    <div id="paypal-button-container"></div>
+                                                    <!-- Sample PayPal credentials (client-id) are included -->
+                                                    <script src="https://www.paypal.com/sdk/js?client-id=ARtV2WlN7mEzOnPIikR3O4lOa0CcLRuIpCawC_ImYB4cacD7o6MGkCfefvryclHJdcDesa3w5bxsbgyP&currency=USD&intent=capture&enable-funding=venmo"></script>
+                                                    <script>
+                                                        const paypalButtonsComponent = paypal.Buttons({
+                                                            // optional styling for buttons
+                                                            // https://developer.paypal.com/docs/checkout/standard/customize/buttons-style-guide/
+                                                            style: {
+                                                                color: "gold",
+                                                                shape: "rect",
+                                                                layout: "vertical"
+                                                            },
+
+                                                            // set up the transaction
+                                                            createOrder: (data, actions) => {
+                                                                // pass in any options from the v2 orders create call:
+                                                                // https://developer.paypal.com/api/orders/v2/#orders-create-request-body
+                                                                const createOrderPayload = {
+                                                                    purchase_units: [
+                                                                        {
+                                                                            amount: {
+                                                                                value: "1.0"
+                                                                            }
+                                                                        }
+                                                                    ]
+                                                                };
+                                                                return actions.order.create(createOrderPayload);
+                                                            },
+
+                                                            // finalize the transaction
+                                                            onApprove: (data, actions) => {
+                                                                const captureOrderHandler = (details) => {
+                                                                    const payerName = details.payer.name.given_name;
+                                                                    console.log('Transaction completed');
+                                                                };
+                                                                return actions.order.capture().then(captureOrderHandler);
+                                                            },
+
+                                                            // handle unrecoverable errors
+                                                            onError: (err) => {
+                                                                console.error('An error prevented the buyer from checking out with PayPal');
+                                                            }
+                                                        });
+
+                                                        paypalButtonsComponent
+                                                            .render("#paypal-button-container")
+                                                            .catch((err) => {
+                                                                console.error('PayPal Buttons failed to render');
+                                                            });
+                                                    </script>
+                                                </div>
+
+                                                <div id="tabs-4">
+
+                                                    Open Easypaisa App in your phone then scan QR CODE and send money
+                                                    <img src="~/Content/img/QR/EASYPAISA.jpeg" style="height: 200px; margin-left:
+    235px;" />
+
+                                                </div>
+                                            </div>
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
+
+<script type="text/javascript">
+    var selected_tab = 0;
+    $(function () {
+        var tabs = $("#tabs").tabs({
+            select: function (e, i) {
+                selected_tab = i.index;
+            }
+        });
+        selected_tab = $("#selectedTab").val() != "" ? parseInt($("#selectedTab").val()) : 0;
+        tabs.tabs('select', selected_tab);
+        $("form").submit(function () {
+            $("#selectedTab").val(selected_tab);
+        });
+    });
+</script>
+
+<script type="text/javascript">
+    $("#btnSubmit").click(function () {
+        var amount = $("#d-send").val();
+        var account = $("#rec-account").val();
+        var acc = @ViewBag.Account;
+        var money = @ViewBag.Dollar;
+        if (amount != "" && amount >! "0" && account != "" && account != acc && amount <= money) {
+            $('#myModal').modal('show');
+            $('#showAmount').html($('#d-send').val());
+            $('#to').html($('#rec-account').val());
+        }
+        else {
+            alert("Form not Validated");
+        }
+    });
+
+    $.ajax({
+        url: "/Home/notiCountReceived",
+        type: "POST",
+        contentType: "application/json; charset=utf-8",
+        cache: false,
+        async: true,
+        success: function (data) {
+            if (data != null && data > 0) {
+                $("#lblNotiCount_Received").html(data);
+            } else {
+
+            }
+        },
+        error: function () {
+        }
+    });
+
+    $.ajax({
+        url: "/Home/notiCountSent",
+        type: "POST",
+        contentType: "application/json; charset=utf-8",
+        cache: false,
+        async: true,
+        success: function (data) {
+            if (data != null && data > 0) {
+                $("#lblNotiCount_Sent").html(data);
+            } else {
+
+            }
+        },
+        error: function () {
+        }
+    });
+
+</script>

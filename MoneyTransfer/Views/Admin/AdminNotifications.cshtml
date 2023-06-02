@@ -1,0 +1,75 @@
+﻿@model List<MoneyTransfer.Database.Admin_NotificationTbl>
+@{
+    ViewBag.Title = "AdminUsers";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<style>
+    .table {
+        text-align: center;
+    }
+
+    input {
+        color: aqua;
+        background-color: black;
+        height: 35px;
+        width: 130px;
+    }
+
+    .reply {
+        width: 100px;
+    }
+</style>
+
+<div class="page-area">
+    <div class="breadcumb-overlay"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="breadcrumb text-center">
+                    <div class="section-headline white-headline text-center">
+                        <h3>Notifications</h3>
+                    </div>
+                    <ul>
+                        <li class="home-bread">Admin</li>
+                        <li>Admin Notifications</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="how-to-area bg-color area-padding">
+    <div class="all-services">
+        <div class="container">
+            @*<table class="table table-bordered table-dark table-hover">*@
+            <table class="table table-bordered table-dark">
+                <thead>
+                    <tr>
+                        <th style="text-align: center">Name</th>
+                        <th style="text-align: center">Email</th>
+                        <th style="text-align: center">Subject</th>
+                        <th style="text-align: center">Message</th>
+                        <th style="text-align: center">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.Name</td>
+                            <td>@item.email</td>
+                            <td>@item.Subject</td>
+                            <td>@item.Message</td>
+                            <td>
+                                <a href="@Url.Action("Reply", new { item.ID })"><input type="button" value="Reply" class="reply" /></a>
+                                <a href="@Url.Action("DeleteNoti", new { item.ID })"><input type="button" value="Delete Record" /></a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

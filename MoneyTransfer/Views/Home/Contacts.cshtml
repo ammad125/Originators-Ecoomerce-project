@@ -1,0 +1,139 @@
+﻿@model MoneyTransfer.Database.Admin_NotificationTbl
+@{
+    ViewBag.Title = "Contacts";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    .error{
+        font-size: 20px;
+    }
+    #success {
+        width: 48.5%;
+        margin-left: 51.4%;
+        color: white;
+        background-color: lightseagreen;
+        border: none;
+    }
+</style>
+
+<body data-spy="scroll" data-target="#navbar-example">
+
+    <!-- End Header Area -->
+    <!-- Start breadcrumbs area -->
+    <div class="page-area">
+        <div class="breadcumb-overlay"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="breadcrumb text-center">
+                        <div class="section-headline white-headline text-center">
+                            <h3>Contact</h3>
+                        </div>
+                        <ul>
+                            <li class="home-bread">Home</li>
+                            <li>Contact</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End breadcrumbs area -->
+    <!-- Start contact page area -->
+    <div class="contact-area bg-color area-padding">
+        <div class="container">
+            <div class="row">
+                <div class="contact-inner">
+                    <!-- Start contact icon column -->
+                    <div class="col-md-4 col-sm-4 col-xs-12">
+                        <div class="contact-icon text-center">
+                            <div class="single-icon">
+                                <i class="fa fa-mobile"></i>
+                                <p>
+                                    Call : +92323893653<br>
+                                    <span>Monday-Friday (10am-18pm)</span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Start contact icon column -->
+                    <div class="col-md-4 col-sm-4 col-xs-12">
+                        <div class="contact-icon text-center">
+                            <div class="single-icon">
+                                <i class="fa fa-envelope-o"></i>
+                                <p>
+                                    Email : hassaanpafkiet@gmail.com<br>
+                                    <span>Email: www.ammadraza521.com</span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Start contact icon column -->
+                    <div class="col-md-4 col-sm-4 col-xs-12">
+                        <div class="contact-icon text-center">
+                            <div class="single-icon">
+                                <i class="fa fa-map-marker"></i>
+                                <p>
+                                    Location : PAF-KIET University Karachi<br>
+                                    <span>Main Campus</span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            @if (TempData["AlertMessage"] != null)
+            {
+                <div class="alert alert-success" id="success">
+                    <strong>Success !</strong> @TempData["AlertMessage"]
+                </div>
+            }
+
+            <div class="row">
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                    <div class="contact-images">
+                        <img src="~/Content/img/about/cb1.jpg" />
+                    </div>
+                </div>
+
+                <!-- Start Left contact -->
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                    <div class="contact-form">
+                        <div class="row">
+                            @using (Html.BeginForm("Contact", "Home", FormMethod.Post))
+                            {
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    @Html.TextBoxFor(x => x.Name, new { placeholder = "Name", @class = "form-control", @required = "required" })
+                                    <div class="help-block with-errors"></div>
+                                </div>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    @Html.TextBoxFor(x => x.email, new { placeholder = "Email", @class = "form-control", @required = "required" })
+                                    <h2>@Html.ValidationMessageFor(x => x.email, "", new { @class = "error" })</h2>
+                                    <div class="help-block with-errors"></div>
+                                </div>
+                                <div class="col-md-12 col-sm-12 col-xs-12">
+                                    @Html.TextBoxFor(x => x.Subject, new { placeholder = "Subject", @class = "form-control", @required = "required" })
+                                    <div class="help-block with-errors"></div>
+                                </div>
+                                <div class="col-md-12 col-sm-12 col-xs-12">
+                                    @Html.TextBoxFor(x => x.Message, new { placeholder = "Message", @class = "form-control", @required = "required" })
+                                    <div class="help-block with-errors"></div>
+                                </div>
+                                <div class="col-md-12 col-sm-12 col-xs-12 text-center">
+                                    <button type="submit" class="add-btn contact-btn" id="submit">Send Message</button>
+
+                                    @*<div id="msgSubmit" class="h3 text-center hidden"></div>
+                                        <div class="clearfix"></div>*@
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+                <!-- End Left contact -->
+            </div>
+        </div>
+    </div>
+    <!-- End contact page area -->
+</body>

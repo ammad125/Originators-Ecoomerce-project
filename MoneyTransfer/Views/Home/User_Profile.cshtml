@@ -1,0 +1,81 @@
+﻿
+@{
+    ViewBag.Title = "User_Profile";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!doctype html>
+<html class="no-js" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="shortcut icon" type="image/x-icon" href="img/logo/favicon.ico">
+
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/themify-icons.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+
+    <script src="js/vendor/modernizr-2.8.3.min.js"></script>
+
+    <style>
+        .maintain{
+            font-size: 17px; 
+            color:#4f8d8f; 
+            font-weight:bold;
+        }
+        button{
+            color: #fff;
+            background-color: #358486;
+            border-radius: 15px;
+            border: 0px white dashed;
+            font-size: 15px;
+            margin-left: 13px;
+        }
+    </style>
+</head>
+
+<body data-spy="scroll" data-target="#navbar-example">
+    <div class="login-area area-padding fix">
+        <div class="login-overlay"></div>
+        <div class="table">
+            <div class="table-cell">
+                <div class="container">
+                    <div class="row">
+
+                        <br /><br /><br />
+
+                        <div class="col-md-offset-3 col-md-6 col-sm-offset-2 col-sm-8 col-xs-12">
+                            <div class="login-form signup-form">
+                                <h4 class="login-title text-center">Muhammad Hassaan</h4>
+
+                                <label class="maintain"><b>User Name: &nbsp;</b></label><label>@ViewBag.username</label><br />
+                                <label class="maintain"><b>Email: &nbsp;</b></label><label>@ViewBag.email</label>
+                                @*<button onclick="location.href='@Url.Action("Settings", "Home")'">
+                                    Change
+                                </button>*@<br />
+                                <label class="maintain"><b>Password: &nbsp;</b></label><label>@ViewBag.password</label>
+                                <button onclick="location.href='@Url.Action("Settings", "Home")'">
+                                    Change
+                                </button><br />
+                                <label class="maintain"><b>Account Number: &nbsp;</b></label><label>@ViewBag.account</label>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/vendor/jquery-1.12.4.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/form-validator.min.js"></script>
+    <script src="js/plugins.js"></script>
+
+</body>
+</html>

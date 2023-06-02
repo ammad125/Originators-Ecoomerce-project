@@ -1,0 +1,128 @@
+﻿@model MoneyTransfer.Database.signup_table
+@{
+    Layout = null;
+}
+
+<!doctype html>
+<html class="no-js" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Login</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- favicon -->
+    <link rel="shortcut icon" type="image/x-icon" href="~/content/img/logo/favicon.ico">
+
+    <!-- all css here -->
+    <!-- bootstrap v3.3.6 css -->
+    <link rel="stylesheet" href="~/content/css/bootstrap.min.css">
+    <!-- font-icon css -->
+    <link rel="stylesheet" href="~/content/css/themify-icons.css">
+    <!-- style css -->
+    <link rel="stylesheet" href="~/content/style.css">
+    <!-- responsive css -->
+    <link rel="stylesheet" href="~/content/css/responsive.css">
+
+    <!-- modernizr css -->
+    <script src="~/content/js/vendor/modernizr-2.8.3.min.js"></script>
+
+    <style>
+        #success {
+            width: 100%;
+            margin-left: 0px;
+            font-size: 20px;
+            margin-bottom: unset;
+        }
+
+        .img {
+            float: left;
+            border-radius: 2px;
+            height: 45px;
+            width: 41px;
+            margin-bottom: -47px;
+            margin-top: 5px;
+            margin-left: 86%;
+        }
+    </style>
+
+</head>
+<body data-spy="scroll" data-target="#navbar-example">
+
+    @if (TempData["AlertMessage"] != null)
+    {
+        <div class="alert alert-success" id="success">
+            <strong>Success !</strong> @TempData["AlertMessage"]
+        </div>
+    }
+
+    <!-- Start Slider Area -->
+    <div class="login-area area-padding fix">
+        <div class="login-overlay"></div>
+        <div class="table">
+            <div class="table-cell">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-offset-3 col-md-6 col-sm-offset-2 col-sm-8 col-xs-12">
+                            <div class="login-form">
+                                <h4 class="login-title text-center">LOGIN</h4>
+                                <div class="row">
+                                    @using (Html.BeginForm("Login", "Accounts"))
+                                    {
+                                        <label style="color: red; margin-left: 18px;">@ViewBag.Error</label>
+
+                                        <div class="col-md-12 col-sm-12 col-xs-12">
+                                            @Html.TextBoxFor(x => x.username, new { placeholder = "Username", @class = "form-control", @required = "required" })
+                                        </div>
+                                        <div class="col-md-12 col-sm-12 col-xs-12">
+                                            <span><img class="img" onclick="myFunctionPass()" src="~/Content/img/background/eye-1792481.png" /></span>
+                                            @Html.PasswordFor(x => x.password, new { placeholder = "Password", @class = "form-control", @required = "required" })
+                                        </div>
+
+                                        <div class="col-md-12 col-sm-12 col-xs-12 text-center">
+                                            <br />
+                                            <button type="submit" id="submit" class="slide-btn login-btn">Login</button>
+                                            <div id="msgSubmit" class="h3 text-center hidden"></div>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                        <div class="col-md-12 col-sm-12 col-xs-12 text-center">
+                                            <div class="clear"></div>
+                                            <div class="sign-icon">
+                                                <div class="acc-not">Don't have an account?  <a href="~/Accounts/SignupIndex">Sign up</a></div>
+                                            </div>
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Slider Area -->
+    <!-- all js here -->
+    <!-- jquery latest version -->
+    <script src="~/content/js/vendor/jquery-1.12.4.min.js"></script>
+    <!-- bootstrap js -->
+    <script src="~/content/js/bootstrap.min.js"></script>
+    <!-- Form validator js -->
+    <script src="~/content/js/form-validator.min.js"></script>
+    <!-- plugins js -->
+    <script src="~/content/js/plugins.js"></script>
+
+    <script>
+        function myFunctionPass() {
+            var x = document.getElementById("password");
+            if (x.type === "password") {
+                x.type = "text";
+            } else {
+                x.type = "password";
+            }
+        }
+    </script>
+
+</body>
+</html>

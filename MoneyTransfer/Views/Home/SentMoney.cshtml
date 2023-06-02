@@ -1,0 +1,113 @@
+﻿
+@{
+    ViewBag.Title = "SentMoney";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    input {
+        color: aqua;
+        background-color: black;
+        height: 35px;
+    }
+</style>
+
+<div class="page-area">
+    <div class="breadcumb-overlay"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="breadcrumb text-center">
+                    <div class="section-headline white-headline text-center">
+                        <h3>Sent Money</h3>
+                    </div>
+                    <ul>
+                        <li class="home-bread">Dashboard</li>
+                        <li>Sent Money</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End breadcrumbs area -->
+<div class="dsahboard-area bg-color area-padding">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3 col-sm-3 col-xs-12">
+                <aside class="sidebar">
+                    <div class="dashboard-side">
+                        <ul>
+                            <li><a href="SendMoney"><i class="ti-new-window"></i>Send Money</a></li>
+                            <li><a href="ReceivedMoney"><i class="fa fa-money"></i>Received Money</a></li>
+                            <li class="active"><a href="#"><i class="fa fa-money"></i>Sent Money</a></li>
+                            <li><a href="a-request-money.html"><i class="ti-receipt"></i>Request Money</a></li>
+                            <li><a href="a-withdraw-money.html"><i class="ti-import"></i>Withdraw Money</a></li>
+                            <li><a href="a-deposite-money.html"><i class="ti-wallet"></i>Deposite Money</a></li>
+                            <li><a href="a-currency-change.html"><i class="ti-stats-up"></i>Currency Exchange</a></li>
+                            <li><a href="a-add-bank.html"><i class="ti-pencil-alt"></i>Bank Account</a></li>
+                            <li><a href="a-card-number.html"><i class="ti-credit-card"></i>Card Number</a></li>
+                            <li><a href="a-transection-log.html"><i class="ti-layout-list-thumb"></i>Transactions</a></li>
+                            <li><a href="a-setting-money.html"><i class="ti-settings"></i>Settings</a></li>
+                        </ul>
+                    </div>
+                    <div class="dashboard-support">
+                        <div class="support-inner">
+                            <div class="help-support">
+                                <i class="flaticon-107-speech-bubbles"></i>
+                                <a href="contact.html"><span class="help-text">Need Help?</span></a>
+                            </div>
+                        </div>
+                    </div>
+                </aside>
+            </div>
+            <div class="col-md-9 col-sm-9 col-xs-12">
+                <div class="dashboard-content">
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="send-money-form">
+                                <div class="form-text">
+                                    <h4 class="form-top">Received Money</h4>
+                                    <div class="form-inner">
+
+
+                                        <div class="col-md-12 col-sm-12 col-xs-12">
+                                            <label for="textmsde" style="font-size: 20px;">Transactions</label>
+                                        </div>
+
+
+                                        <table class="table table-bordered table-dark text-center">
+                                            <thead>
+                                                <tr>
+                                                    <th style="text-align: center">From Account</th>
+                                                    <th style="text-align: center">To Account</th>
+                                                    <th style="text-align: center">Amount</th>
+                                                    <th style="text-align: center">Date & Time</th>
+                                                    <th style="text-align: center">Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach (var item in Model)
+                                                {
+                                                    <tr>
+                                                        <td>@item.From_Acc</td>
+                                                        <td>@item.To_Acc</td>
+                                                        <td>@item.Amount</td>
+                                                        <td>@item.DateTime</td>
+                                                        <td>
+                                                            <a href="@Url.Action("DownloadUser", new { item.ID })"><input type="button" value="Download" /></a>
+                                                        </td>
+                                                    </tr>
+                                                }
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,174 @@
+﻿@model MoneyTransfer.Database.signup_table
+@{
+    Layout = null;
+    //Layout = "~/Views/Shared/_Layout.cshtml";
+    <!-- all css here -->
+    <!-- bootstrap v3.3.6 css -->
+    <link rel="stylesheet" href="~/content/css/bootstrap.min.css">
+    <!-- owl.carousel css -->
+    <link rel="stylesheet" href="~/content/css/owl.carousel.css">
+    <link rel="stylesheet" href="~/content/css/owl.transitions.css">
+    <!-- Animate css -->
+    <link rel="stylesheet" href="~/content/css/animate.css">
+    <!-- Nice-select css -->
+    <link rel="stylesheet" href="~/content/css/nice-select.css">
+    <!-- meanmenu css -->
+    <link rel="stylesheet" href="~/content/css/meanmenu.min.css">
+    <!-- font-awesome css -->
+    <link rel="stylesheet" href="~/content/css/font-awesome.min.css">
+    <link rel="stylesheet" href="~/content/css/themify-icons.css">
+    <link rel="stylesheet" href="~/content/css/flaticon.css">
+    <!-- magnific css -->
+    <link rel="stylesheet" href="~/content/css/magnific.min.css">
+    <!-- style css -->
+    <link rel="stylesheet" href="~/content/style.css">
+    <!-- responsive css -->
+    <link rel="stylesheet" href="~/content/css/responsive.css">
+
+    <!-- modernizr css -->
+    <script src="~/content/js/vendor/modernizr-2.8.3.min.js"></script>
+}
+
+<link rel="stylesheet" href="https://cdnjs.cloudfare.com/ajax/libs/fonts-awesome/4.7.0/css/font-awesome.min.css" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.js"></script>
+
+<style>
+    .errormessage {
+        color: red;
+    }
+    #userform{
+        color: red;
+    }
+</style>
+
+<!doctype html>
+<html class="no-js" lang="en">
+
+<!-- Mirrored from rockstheme.com/rocks/bultifore-preview/signup.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 18 Oct 2021 14:32:21 GMT -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Signup</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- favicon -->
+    <link rel="shortcut icon" type="image/x-icon" href="img/logo/favicon.ico">
+
+    <!-- all css here -->
+    <!-- bootstrap v3.3.6 css -->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <!-- font-icon css -->
+    <link rel="stylesheet" href="css/themify-icons.css">
+    <!-- style css -->
+    <link rel="stylesheet" href="style.css">
+    <!-- responsive css -->
+    <link rel="stylesheet" href="css/responsive.css">
+
+    <!-- modernizr css -->
+    <script src="js/vendor/modernizr-2.8.3.min.js"></script>
+</head>
+
+<body data-spy="scroll" data-target="#navbar-example">
+
+    <!--[if lt IE 8]>
+        <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+    <!-- Start Slider Area -->
+
+    <div class="login-area area-padding fix">
+        <div class="login-overlay"></div>
+        <div class="table">
+            <div class="table-cell">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-offset-3 col-md-6 col-sm-offset-2 col-sm-8 col-xs-12">
+                            <div class="login-form signup-form">
+                                <h4 class="login-title text-center">REGISTER</h4>
+                                <div class="row">
+                                    @using (Html.BeginForm("Signup", "Accounts", FormMethod.Post, new { id = "userform" }))
+                                    {
+                                        <div class="col-md-12 col-sm-12 col-xs-12">
+                                            @Html.TextBoxFor(x => x.FullName, new { placeholder = "FullName", @Id = "FullName", @class = "form-control" })
+                                        </div>
+                                        <div class="col-md-12 col-sm-12 col-xs-12">
+                                            <div class="errormessage">@ViewBag.username</div>
+                                            @Html.TextBoxFor(x => x.username, new { placeholder = "Username", @Id = "username", @class = "form-control" })
+                                        </div>
+                                        <div class="col-md-12 col-sm-12 col-xs-12">
+                                            <div class="errormessage">@ViewBag.sameEmail</div>
+                                            @Html.TextBoxFor(x => x.email, new { placeholder = "Email", @Id = "email", @class = "form-control"  })
+                                        </div>
+                                        <div class="col-md-12 col-sm-12 col-xs-12">
+                                            <div class="errormessage">@ViewBag.same</div>
+                                            @Html.TextBoxFor(x => x.password, new { @type = "password", @class = "form-control", @Id = "password", placeholder = "Password" })
+                                        </div>
+                                        <div class="col-md-12 col-sm-12 col-xs-12">
+                                            @Html.PasswordFor(x => x.conf_password, new { placeholder = "Confirm Password", @Id = "conf_pass", @class = "form-control" })
+                                        </div>
+
+                                        <div class="col-md-12 col-sm-12 col-xs-12 text-center">
+                                            <button type="submit" onclick="checkLogin()" class="slide-btn login-btn" id="submit">Signup</button>
+                                        </div>
+
+                                        <div class="col-md-12 col-sm-12 col-xs-12 text-center">
+                                            <div class="sign-icon" style="font-size: 18px;">
+                                                <div class="acc-not"><span style="color: #fff;"> have an account? </span> <a href="Login">Login</a></div>
+                                            </div>
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Slider Area -->
+    <!-- all js here -->
+    <!-- jquery latest version -->
+    <script src="js/vendor/jquery-1.12.4.min.js"></script>
+    <!-- bootstrap js -->
+    <script src="js/bootstrap.min.js"></script>
+    <!-- Form validator js -->
+    <script src="js/form-validator.min.js"></script>
+    <!-- plugins js -->
+    <script src="js/plugins.js"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.js"></script>
+    <script src="~/scripts/Validation.js"></script>
+    <script>
+
+        //function myFunctionPass() {
+        //    var x = document.getElementById("password");
+        //    if (x.type === "password") {
+        //        x.type = "text";
+        //    } else {
+        //        x.type = "password";
+        //    }
+        //}
+        //function myFunctionConf_Pass() {
+        //    var x = document.getElementById("conf_pass");
+        //    if (x.type === "password") {
+        //        x.type = "text";
+        //    } else {
+        //        x.type = "password";
+        //    }
+        //}
+
+
+        function checkLogin() {
+            var $regForm = $("#userform");
+            if ($regForm.valid()) {
+                $($regForm)[0].submit();
+                $($regForm)[0].reset();
+            }
+        }
+
+    </script>
+
+</body>
+</html>

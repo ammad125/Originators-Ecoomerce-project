@@ -1,0 +1,23 @@
+﻿<!DOCTYPE html>
+<head>
+    @if (!User.Identity.IsAuthenticated) { Response.Redirect("~/Accounts/Login"); }
+    <link href="~/ECom/css/bootstrap.css" rel="stylesheet" />
+    <link href="~/ECom/css/flexslider.css" rel="stylesheet" />
+    <link href="~/ECom/css/font-awesome.css" rel="stylesheet" />
+    <link href="~/ECom/css/style.css" rel="stylesheet" />
+
+    <script src="~/ECom/js/bootstrap.min.js"></script>
+    <script src="~/ECom/js/counterup.min.js"></script>
+    <script src="~/ECom/js/easing.js"></script>
+    <script src="~/ECom/js/jquery-1.11.1.min.js"></script>
+    <script src="~/ECom/js/jquery.flexslider.js"></script>
+    <script src="~/ECom/js/jquery.wmuSlider.js"></script>
+    <script src="~/ECom/js/minicart.js"></script>
+    <script src="~/ECom/js/move-top.js"></script>
+    <script src="~/ECom/js/okzoom.js"></script>
+    <script src="~/ECom/js/waypoints.min.js"></script>
+
+
+</head>
+
+@RenderBody();

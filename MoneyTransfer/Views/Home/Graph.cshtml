@@ -1,0 +1,303 @@
+﻿
+@{
+    ViewBag.Title = "Graph";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+<script src="~/Scripts/d3.min.js"></script>
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<link href="~/Content/c3.css" rel="stylesheet" />
+<script src="~/Scripts/c3.min.js"></script>
+
+<style>
+    p {
+        color: black;
+    }
+
+    .form-control {
+        color: #fff;
+    }
+</style>
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+
+    <div class="page-area">
+        <div class="breadcumb-overlay"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="breadcrumb text-center">
+                        <div class="section-headline white-headline text-center">
+                            <h3>Graphical Data</h3>
+                        </div>
+                        <ul>
+                            <li class="home-bread">Dashboard</li>
+                            <li>Graphical Data</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End breadcrumbs area -->
+    <div class="dsahboard-area bg-color area-padding">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="dashboard-head">
+                        <div class="row">
+                            <div class="col-md-3 col-sm-3 col-xs-12">
+                                <div class="single-dash-head">
+                                    <div class="dashboard-profile">
+                                        <div class="profile-content">
+                                            <img src="img/about/profile.png" alt="">
+                                            <span class="pro-name">@User.Identity.Name</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-4 col-xs-12" style="margin-left: 40px;">
+                                <div class="single-dash-head">
+                                    <div class="dashboard-amount">
+                                        <div class="amount-content">
+                                            <i class="flaticon-028-money"></i>
+                                            <span class="pro-name">Balance: $@ViewBag.Dollar</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-4 col-xs-12">
+                                <div class="single-dash-head">
+                                    <div class="dashboard-amount">
+                                        <div class="amount-content">
+                                            <a class="edit-icon" href="a-add-bank.html"><i class="ti-pencil-alt"></i></a>
+                                            <i class="flaticon-043-bank-2"></i>
+                                            <span class="pro-name">Account @ViewBag.Account</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3 col-sm-3 col-xs-12">
+                    <aside class="sidebar">
+                        <div class="dashboard-side">
+                            <ul>
+                                <li><a href="SendMoney"><i class="ti-new-window"></i>Send Money</a></li>
+                                <li>
+                                    <a href="ReceivedMoney">
+                                        <i class="fa fa-money"></i>Received Money
+                                        <label id="lblNotiCount_Received" style="color: white; background-color: red; border-radius: 10px; text-align: center; padding: 0 5px 0px 5px;"></label>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="SentMoney">
+                                        <i class="fa fa-money"></i>Sent Money
+                                        <label id="lblNotiCount_Sent" style="color: white; background-color: red; border-radius: 10px; text-align: center; padding: 0 5px 0px 5px;"></label>
+                                    </a>
+                                </li>
+                                <li><a href="~/Home/Stripe_Dashboard"><i class="ti-wallet"></i>Stripe Dashboard</a></li>
+                                <li><a href="Index"><i class="ti-stats-up"></i>Currency Exchange</a></li>
+                                <li class="active"><a href="#"><i class="fa fa-pie-chart"></i>Graphical Data</a></li>
+                                <li><a href="Settings"><i class="ti-settings"></i>Settings</a></li>
+                            </ul>
+                        </div>
+                        <div class="dashboard-support">
+                            <div class="support-inner">
+                                <div class="help-support">
+                                    <i class="flaticon-107-speech-bubbles"></i>
+                                    <a href="Contacts"><span class="help-text">Need Help?</span></a>
+                                </div>
+                            </div>
+                        </div>
+                    </aside>
+                </div>
+                <div class="col-md-9 col-sm-9 col-xs-12">
+                    <div class="dashboard-content">
+                        <div class="row">
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <div class="send-money-form">
+                                    <div class="form-text">
+                                        <h4 class="form-top">
+                                            Data in Graph
+                                        </h4>
+
+                                        <div class="form-inner">
+                                            <div id="tabs" style="width:730px">
+                                                <ul>
+                                                    <li><a href="#tabs-1">Pie Graph</a></li>
+                                                    <li><a href="#tabs-2">Bar Graph</a></li>
+                                                    <li><a href="#tabs-3">Line Graph</a></li>
+                                                </ul>
+                                                <div id="tabs-1">   @* Tab 1 *@
+
+                                                    <div>
+                                                        <div id="loadChart"></div>
+                                                    </div>
+                                                    <script>
+                                                        $(document).ready(function () {
+                                                            $.ajax({
+                                                                url: "/Home/LoadData",
+                                                                type: "GET",
+                                                                contentType: "application/json; charset=utf-8",
+                                                                dataType: "json",
+                                                                success: function (response) {
+                                                                    successFunc(response);
+                                                                },
+                                                                error: function () {
+                                                                }
+                                                            });
+
+                                                            function successFunc(jsondata) {
+                                                                var data = {};
+                                                                var names = [];
+
+                                                                jsondata.forEach(function (e) {
+                                                                    names.push(e.Trans_ID);
+                                                                    data[e.Trans_ID] = e.Amount;
+                                                                })
+                                                                var chart = c3.generate({
+                                                                    bindto: '#loadChart',
+                                                                    data: {
+                                                                        json: [data],
+                                                                        keys: {
+                                                                            value: names,
+                                                                        },
+                                                                        type: 'pie'
+                                                                    },
+                                                                });
+                                                            }
+                                                        });
+                                                    </script>
+
+                                                </div>
+
+                                                <div id="tabs-2">   @* Tab 2 *@
+
+                                                    <div>
+                                                        <div id="loadChart2"></div>
+                                                    </div>
+                                                    <script>
+                                                        $(document).ready(function () {
+                                                            $.ajax({
+                                                                url: "/Home/LoadData",
+                                                                type: "GET",
+                                                                contentType: "application/json; charset=utf-8",
+                                                                dataType: "json",
+                                                                success: function (response) {
+                                                                    successFunc(response);
+                                                                },
+                                                                error: function () {
+                                                                }
+                                                            });
+
+                                                            function successFunc(jsondata) {
+                                                                var data = {};
+                                                                var names = [];
+
+                                                                jsondata.forEach(function (e) {
+                                                                    names.push(e.Trans_ID);
+                                                                    data[e.Trans_ID] = e.Amount;
+                                                                })
+                                                                var chart = c3.generate({
+                                                                    bindto: '#loadChart2',
+                                                                    data: {
+                                                                        json: [data],
+                                                                        keys: {
+                                                                            value: names,
+                                                                        },
+                                                                        type: 'bar'
+                                                                    },
+                                                                });
+                                                            }
+                                                        });
+                                                    </script>
+
+                                                </div>
+
+                                                <div id="tabs-3">   @* Tab 3 *@
+
+                                                    <div>
+                                                        <div id="loadChart3"></div>
+                                                    </div>
+                                                    <script>
+                                                        $(document).ready(function () {
+                                                            $.ajax({
+                                                                url: "/Home/LoadData",
+                                                                type: "GET",
+                                                                contentType: "application/json; charset=utf-8",
+                                                                dataType: "json",
+                                                                success: function (response) {
+                                                                    successFunc(response);
+                                                                },
+                                                                error: function () {
+                                                                }
+                                                            });
+
+                                                            function successFunc(jsondata) {
+                                                                var data = {};
+                                                                var names = [];
+
+                                                                jsondata.forEach(function (e) {
+                                                                    names.push(e.Trans_ID);
+                                                                    data[e.Trans_ID] = e.Amount;
+                                                                })
+                                                                var chart = c3.generate({
+                                                                    bindto: '#loadChart3',
+                                                                    data: {
+                                                                        json: [data],
+                                                                        keys: {
+                                                                            value: names,
+                                                                        },
+                                                                        type: 'line'
+                                                                    },
+                                                                });
+                                                            }
+                                                        });
+                                                    </script>
+
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
+
+<script type="text/javascript">
+    var selected_tab = 0;
+    $(function () {
+        var tabs = $("#tabs").tabs({
+            select: function (e, i) {
+                selected_tab = i.index;
+            }
+        });
+        selected_tab = $("#selectedTab").val() != "" ? parseInt($("#selectedTab").val()) : 0;
+        tabs.tabs('select', selected_tab);
+        $("form").submit(function () {
+            $("#selectedTab").val(selected_tab);
+        });
+    });
+</script>

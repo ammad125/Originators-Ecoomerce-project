@@ -1,0 +1,67 @@
+﻿@model List<MoneyTransfer.Database.tbl_Transaction>
+@{
+    ViewBag.Title = "AdminTransaction";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<style>
+    input {
+        color: aqua;
+        background-color: black;
+        height: 35px;
+    }
+</style>
+
+<div class="page-area">
+    <div class="breadcumb-overlay"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="breadcrumb text-center">
+                    <div class="section-headline white-headline text-center">
+                        <h3>Transaction Records</h3>
+                    </div>
+                    <ul>
+                        <li class="home-bread">Admin</li>
+                        <li>User Transactions</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="how-to-area bg-color area-padding">
+    <div class="all-services">
+        <div class="container">
+            <table class="table table-bordered table-dark text-center">
+                <thead>
+                    <tr>
+                        <th style="text-align: center">ID</th>
+                        <th style="text-align: center">From Account</th>
+                        <th style="text-align: center">To Account</th>
+                        <th style="text-align: center">Amount</th>
+                        <th style="text-align: center">Date & Time</th>
+                        <th style="text-align: center">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.ID</td>
+                            <td>@item.From_Acc</td>
+                            <td>@item.To_Acc</td>
+                            <td>@item.Amount</td>
+                            <td>@item.DateTime</td>
+                            <td>
+                                <a href="@Url.Action("Download", new { item.ID })"><input type="button" value="Download" /></a>
+                                <a href="@Url.Action("Delete", new { item.ID })"><input type="button" value="Delete Record" /></a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
