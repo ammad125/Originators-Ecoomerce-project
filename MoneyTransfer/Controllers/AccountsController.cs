@@ -30,6 +30,7 @@ namespace MoneyTransfer.Controllers
         }
 
         [HttpPost]
+        //login accounts
         public ActionResult Login(signup_table model)
         {
             try
@@ -68,6 +69,7 @@ namespace MoneyTransfer.Controllers
             return View();
         }
         [HttpPost]
+        //sign up accounts
         public ActionResult Signup(signup_table model)
         {
             var sameEmail = dbobj.signup_table.Where(x => x.email == model.email).FirstOrDefault();
@@ -157,7 +159,7 @@ namespace MoneyTransfer.Controllers
 
             dbobj.resetExtras.Add(RE);
             dbobj.SaveChanges();
-
+            //activation codes
             var subject = "Activation Code";
             var body = "Hi " + User.Identity.Name + ", <br/> Your Account acctivation code is. " +
 
@@ -270,6 +272,7 @@ namespace MoneyTransfer.Controllers
         }
         private void SendEmail(string emailAddress, string body, string subject)
         {
+            //mail trasfer protocol
             using (MailMessage mm = new MailMessage(emailAddress, emailAddress))
             {
                 mm.Subject = subject;

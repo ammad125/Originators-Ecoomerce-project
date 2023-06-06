@@ -117,6 +117,7 @@ namespace MoneyTransfer.Controllers
             }
             return View();
         }
+        //admin notifications
         public ActionResult AdminNotifications()
         {
             try
